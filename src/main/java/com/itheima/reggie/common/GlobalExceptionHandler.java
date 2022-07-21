@@ -39,4 +39,17 @@ public class GlobalExceptionHandler {
 
         return R.error("未知错误");
     }
+
+
+    /**
+     * 异常处理方法：
+     *    一旦Controller抛出CustomException， 在此处拦截到并用以下方法处理
+     *
+     * @return
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> customExceptionHandler(CustomException ex){
+        log.error(ex.getMessage());
+        return R.error(ex.getMessage());
+    }
 }
