@@ -43,6 +43,7 @@ public class JacksonObjectMapper extends ObjectMapper {
                 .addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT)))
 
                 .addSerializer(BigInteger.class, ToStringSerializer.instance)
+                // 可以将 long型数据转化成字符串传给前端，解决 long型 id在前端会丢失精度导致传到后端无法在数据库中查询到该行数据的问题
                 .addSerializer(Long.class, ToStringSerializer.instance)
                 .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)))
                 .addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)))
