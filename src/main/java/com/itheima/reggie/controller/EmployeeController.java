@@ -93,6 +93,9 @@ public class EmployeeController {
         //设置初始密码123456，需要进行md5加密处理
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
+        /*
+
+        //配置了自动填充，此处代码不需要了
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
 
@@ -101,6 +104,8 @@ public class EmployeeController {
 
         employee.setCreateUser(empId);
         employee.setUpdateUser(empId);
+
+        */
 
         /* 使用异常处理类解决了MYSQL抛出的用户名不能重复的异常 */
         employeeService.save(employee);
