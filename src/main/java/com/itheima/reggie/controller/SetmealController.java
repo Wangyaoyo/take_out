@@ -109,6 +109,13 @@ public class SetmealController {
         return R.success("套餐数据删除成功");
     }
 
+    /**参数接收：
+     *     @RequestBody 代表接收的是一个json数据
+     *     如果是拼接在url(http://localhost:8085/dish/list?categoryId=1397844391040167938&status=1)
+     * 后面的参数可以直接使用对象(Setmeal setmeal)接收
+     * @param setmeal
+     * @return
+     */
     @GetMapping("/list")
     public R<List<Setmeal>> list(Setmeal setmeal) {
         log.info("setmeal:{}", setmeal);

@@ -37,6 +37,7 @@ public class LoginCheckFilter implements Filter{
         String[] urls = new String[]{
                 "/employee/login",
                 "/employee/logout",
+                "/user/**",
                 "/backend/**",
                 "/front/**"
         };
@@ -64,6 +65,18 @@ public class LoginCheckFilter implements Filter{
             return;
         }
 
+
+        //5、判断移动端登录状态，如果已登录，则直接放行
+        if(request.getSession().getAttribute("user") != null){
+            log.info("用户已登录，用户id为：{}",request.getSession().getAttribute("user"));
+
+            // 从session中获取 id设置到 ThreadLocal中
+            Long userId = (Long) request.getSession().getAttribute("user");
+            BaseContext.setCurrentId(userId);
+
+            filterChain.doFilter(request,response);
+            return;
+        }
         log.info("用户未登录");
         //5、如果未登录则返回未登录结果，通过输出流方式向客户端页面响应数据
         response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
